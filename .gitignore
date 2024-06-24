@@ -418,6 +418,9 @@ ServiceFabricBackup/
 # SQL Server files
 *.ndf
 
+#SQLite
+*.db
+
 # Business Intelligence projects
 *.rptproj.rsuser
 *- [Bb]ackup.rdl
@@ -734,10 +737,3 @@ obj/
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,csharp,dotnetcore,aspnetcore
 
 .tfs_info
-
-# Agora.GitFlow
-
-.gitconfig
-Agora.GitFlow/*
-Agora.GitFlow
-/src/Agora.Popups.Api/Agora.Popups.Api.csproj.user
