@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using asp.net_mvc.Data;
+using asp.net_mvc.Repositories.Interfaces;
+using asp.net_mvc.Repositories.Implementations;
+
+#region Configure Services
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,12 +18,19 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+#endregion
+
+#region Configure APP
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
 }
 else
 {
@@ -41,3 +52,5 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+#endregion
