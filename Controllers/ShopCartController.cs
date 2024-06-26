@@ -1,10 +1,12 @@
 using asp.net_mvc.Models;
 using asp.net_mvc.Repositories.Interfaces;
 using asp.net_mvc.ViewModel.ShopCart;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asp.net_mvc.Controllers
 {
+    [Authorize]
     public class ShopCartController : Controller
     {
         private readonly ILogger<ShopCartController> _logger;

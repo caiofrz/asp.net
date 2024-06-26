@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace asp.net_mvc.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly ILogger<OrderController> _logger;

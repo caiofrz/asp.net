@@ -1,10 +1,11 @@
-using System.Runtime.CompilerServices;
 using asp.net_mvc.Repositories.Interfaces;
 using asp.net_mvc.ViewModel.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asp.net_mvc.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
 
@@ -17,6 +18,7 @@ namespace asp.net_mvc.Controllers
             _repository = repository;
         }
 
+        [AllowAnonymous]
         public IActionResult Index(string category = null)
         {
             var viewModel = new IndexViewModel();
@@ -25,7 +27,7 @@ namespace asp.net_mvc.Controllers
             if (category is not null)
             {
                 viewModel.Products = viewModel.Products
-                        .Where(product => 
+                        .Where(product =>
                                 product.Category.Name.Equals(category, StringComparison.OrdinalIgnoreCase));
             }
             viewModel.TotalProducts = viewModel.Products.Count();
@@ -34,7 +36,9 @@ namespace asp.net_mvc.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Details(int id){
+        [AllowAnonymous]
+        public IActionResult Details(int id)
+        {
             var product = _repository.GetById(id).Result;
             return View(product);
         }
