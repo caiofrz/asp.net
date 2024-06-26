@@ -1,0 +1,71 @@
+@model asp.net_mvc.ViewModel.ShopCart.IndexViewModel
+
+<div class="container-fluid">
+<div class="row checkoutForm">
+     <div>
+       <h4> @Model.Title </h4>
+    </div>
+
+    <table class="table table-bordered table-striped">
+
+         <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th class="text-right">Preço</th>
+                <th class="text-right">Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var item in Model.ShopCart.Items)
+            {
+                  <tr>
+                      <td class="text-center">@item.Product.Name</td>
+                      <td class="text-left">@item.Quantity</td>
+                      <td class="text-right">@item.Product.Price.ToString("c")</td>
+                      
+                       <td class="text-right">
+                          @((item.Quantity * item.Product.Price).ToString("c"))
+                       </td>
+
+                       <td class="text-center">
+                         <a                
+                          asp-controller="ShopCart"
+                          asp-action="RemoveItem"
+                          asp-route-productId="@item.Product.Id"
+                          class="text-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                            </svg>                       
+                        </a>
+                      </td>
+                  </tr>                  
+            }
+        </tbody>
+         <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">
+                    @Model.TotalValue.ToString("c")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    
+    <div class="text-right">
+        @if(@Model.ShopCart.Items.Count > 0)
+        {
+            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Encerrar Pedido</a>
+        } else {
+            <div class="alert alert-warning w-25" role="alert">Seu carrinho está vazio..</div>
+        }
+            &nbsp;&nbsp;&nbsp;
+         <a class="btn btn-primary" asp-controller="Products" asp-action="Index">Continuar Comprando</a>
+    </div>
+   <br />
+</div>
+</div>

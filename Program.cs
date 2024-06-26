@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using asp.net_mvc.Data;
 using asp.net_mvc.Repositories.Interfaces;
 using asp.net_mvc.Repositories.Implementations;
+using asp.net_mvc.Models;
 
 #region Configure Services
 
@@ -17,9 +18,14 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped(sc => ShopCart.GetShopCart(sc));
 #endregion
 
 #region Configure APP
@@ -41,8 +47,8 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
+app.UseSession();
 
 // app.UseAuthorization();
 

@@ -420,6 +420,8 @@ ServiceFabricBackup/
 
 #SQLite
 *.db
+*.db-shm
+*.db-wal
 
 # Business Intelligence projects
 *.rptproj.rsuser

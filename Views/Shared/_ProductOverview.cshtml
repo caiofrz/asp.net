@@ -1,0 +1,29 @@
+@model Product
+
+<div class="card mb-3 p-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="https://th.bing.com/th/id/OIP.Rtx4iye-2rHVLHi1l2uOfAHaEn?rs=1&pid=ImgDetMain"
+                class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <a class="link-dark link-underline-opacity-0" asp-area="" asp-controller="Products" asp-action="Details"
+                    asp-route-id="@Model.Id">
+                    <h5 class="card-title">@Model.Name</h5>
+                </a>
+                <p class="card-text">@Model.Description</p>
+                <p class="card-text fw-bold">@Model.Price.ToString("c")</p>
+            </div>
+        </div>
+        <button class="btn btn-primary">
+            <a class="link-light link-underline-primary link-underline-opacity-0"
+                asp-area=""
+                asp-controller="ShopCart"
+                asp-action="AddItem"
+                asp-route-productId="@Model.Id">
+                Adicionar
+            </a>
+        </button>
+    </div>
+</div>

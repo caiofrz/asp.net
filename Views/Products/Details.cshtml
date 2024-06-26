@@ -1,0 +1,22 @@
+@model Product
+
+<div class="row">
+    <a asp-controller="Products" asp-action="Index" class="nav-link mb-5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+        </svg>
+        Voltar
+    </a>
+    <div class="container-fluid text-center">
+        <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid text-center">
+
+        <h3>@Model.Name</h3>
+        <p>@Model.Description</p>
+        <div class="btn-group row p-3 w-50">
+            <a asp-controller="ShopCart" asp-action="AddItem" asp-route-productId="@Model.Id"
+                class="btn btn-primary btn-sm">Adicionar ao carrinho</a>
+        </div>
+    </div>
+</div>
